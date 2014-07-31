@@ -3,7 +3,7 @@ FROM sergeyzh/centos6-epel
 MAINTAINER Sergey Zhukov, sergey@jetbrains.com
 
 ADD rpms/ /root/rpms/
-RUN yum localinstall -y /root/rpms/*.rpm ; rm -rm /root/rpms
+RUN yum localinstall -y /root/rpms/*.rpm ; rm -rf /root/rpms
 
 RUN touch /etc/sysconfig/network
 RUN sed -i 's/listen = 127.0.0.1:9000/listen = 0.0.0.0:9000/g' /etc/php-fpm.d/www.conf

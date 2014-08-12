@@ -1,0 +1,10 @@
+[template]
+src   = "php.ini.tmpl"
+dest  = "/conf/phpfpm/php.ini"
+owner = "root"
+group = "root"
+mode  = "0644"
+keys = [
+  "/",
+]
+reload_cmd = "etcdctl set /services/phpfpm/reload reload"

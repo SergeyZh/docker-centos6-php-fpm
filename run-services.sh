@@ -35,6 +35,8 @@ shutdown_php_fpm()
 {
     echo "Stopping container..."
     /sbin/service php-fpm stop
+    killall reloader.sh
+    killall etcdctl
     exit 0
 }
 
@@ -43,6 +45,10 @@ trap shutdown_php_fpm SIGINT SIGTERM SIGHUP
 /sbin/service php-fpm start
 
 tail -f /var/log/php-fpm/www-error.log &
+
+if [ ! -z "${ETCD_PEER}" ] ; then
+    /reloader.sh ${ETCD_PEER} ${ETCD_WATCH} &
+fi
 
 wait
 

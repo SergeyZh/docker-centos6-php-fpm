@@ -1,17 +1,17 @@
 #!/bin/sh
 
-if [ -z "$1" ] ; then
-    echo "Usage: $0 <etcd_peer> [<etcd_path_to_watch>]"
-    exit 1
-fi
+#if [ -z "$1" ] ; then
+#    echo "Usage: $0 <etcd_peer> [<etcd_path_to_watch>]"
+#    exit 1
+#fi
 
-ETCD_WATCH=/services/phpfpm/reload
-if [ ! -z "$2" ] ; then
-    ETCD_WATCH=$2
+ETCDCTL_WATCH=/services/phpfpm/reload
+if [ ! -z "$1" ] ; then
+    ETCDCTL_WATCH=$1
 fi
 
 while true ; do
-    RESULT=`etcdctl -peers $1 watch ${ETCD_WATCH}`
+    RESULT=`etcdctl watch ${ETCDCTL_WATCH}`
     
     if [ "${RESULT}" == "reload" ] ; then
 	echo "Catched reload action. Reloading..."

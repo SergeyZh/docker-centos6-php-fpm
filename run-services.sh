@@ -46,8 +46,9 @@ trap shutdown_php_fpm SIGINT SIGTERM SIGHUP
 
 tail -f /var/log/php-fpm/www-error.log &
 
-if [ ! -z "${ETCD_PEER}" ] ; then
-    /reloader.sh ${ETCD_PEER} ${ETCD_WATCH} &
+if [ ! -z "${ETCDCTL_PEERS}" ] ; then
+    export ETCDCTL_PEERS
+    /reloader.sh ${ETCDCTL_WATCH} &
 fi
 
 wait

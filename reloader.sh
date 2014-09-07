@@ -15,7 +15,7 @@ while true ; do
     
     if [ "${RESULT}" == "reload" ] ; then
 	echo "Catched reload action. Reloading..."
-	cp -f /conf/phpfpm/php.ini /etc/php.ini
+	cp -rf /conf/phpfpm/* /etc/
 	/sbin/service php-fpm reload
     fi
     # To reduce CPU usage on etcd errors

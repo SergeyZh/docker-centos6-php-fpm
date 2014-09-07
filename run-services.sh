@@ -17,9 +17,9 @@ modify_www_conf()
     echo "www.conf Param: $1"
     NAME=`echo $1 | cut -d '=' -f 1`
     VALUE=`echo $1 | cut -d '=' -f 2`
-    sed -i "/^${NAME}/ s/${NAME}.*/${NAME}\ =\ ${VALUE}/" /etc/phpfpm.d/www.conf
-    if [ -z "`grep -E ^${NAME} /etc/phpfpm.d/www.conf`" ] ; then 
-	echo "${NAME} = ${VALUE}" >> /etc/phpfpm.d/www.conf
+    sed -i "/^${NAME}/ s/${NAME}.*/${NAME}\ =\ ${VALUE}/" /etc/php-fpm.d/www.conf
+    if [ -z "`grep -E ^${NAME} /etc/php-fpm.d/www.conf`" ] ; then 
+	echo "${NAME} = ${VALUE}" >> /etc/php-fpm.d/www.conf
 	echo "Added"
     fi
 }

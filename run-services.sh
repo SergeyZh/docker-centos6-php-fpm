@@ -44,7 +44,7 @@ fi
 
 ARRAY_PHP=`set | grep -E ^WWWCONF_`
 if [ ! -z "${ARRAY_PHP}" ] ; then
-    ARRAY_PHP=`echo ${ARRAY_PHP} | sed s/WWWCONF_//g | sed s/__/./g`
+    ARRAY_PHP=`echo ${ARRAY_PHP} | sed s/WWWCONF_//g | sed s/____/\]/g | sed s/___/\[/g | sed s/__/./g`
     for PARAM in ${ARRAY_PHP} ; do
 	modify_www_conf ${PARAM}
     done

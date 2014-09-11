@@ -10,6 +10,7 @@ With additional configuration (see below) it can reload configuration on the fly
 
 * `PHP_FPM_USER` - the user id to run PHP-FPM daemon. Optional.
 * `PHPINI_xxxxx` - set of variables to modify php.ini. Optional.
+* `WWWCONF_xxxxx` - set of variables to modify www.conf. Optional.
 * `ETCDCTL_PEERS` - address of etcd service to watch reload signal. Optional.
 * `ETCDCTL_WATCH` - path inside etcd to watch reload signal. Optional.
 
@@ -23,6 +24,9 @@ For example `-e PHPINI_upload_max_filesize=5M` will set upload_max_filesize = 5M
 
 If you need to set variable with dot `.` inside, you may use double underscore `__`.
 For example `-e PHPINI_soap__wsdl_cache_enabled=1` will set soap.wsdl_cache_enabled = 1 at php.ini.
+
+Also you may set characters `[` and `]` in variable names. 3 underscores `___` = `[` and 4 underscores `____` = `]`.
+So `WWWCONF_env___test____=10` should be `env[test]=10`.
 
 ### Reload configuration on the fly
 

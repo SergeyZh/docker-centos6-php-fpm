@@ -5,7 +5,7 @@ modify_php_ini()
     echo "PHP Param: $1"
     NAME=`echo $1 | cut -d '=' -f 1`
     VALUE=`echo $1 | cut -d '=' -f 2`
-    sed -i "/^${NAME}/ s/${NAME}.*/${NAME}\ =\ ${VALUE}/" /etc/php.ini
+    sed -i "/^${NAME}/ s|${NAME}.*|${NAME}\ =\ ${VALUE}|" /etc/php.ini
     if [ -z "`grep -E ^${NAME} /etc/php.ini`" ] ; then 
 	echo "${NAME} = ${VALUE}" >> /etc/php.ini
 	echo "Added"
@@ -17,7 +17,7 @@ modify_www_conf()
     echo "www.conf Param: $1"
     NAME=`echo $1 | cut -d '=' -f 1`
     VALUE=`echo $1 | cut -d '=' -f 2`
-    sed -i "/^${NAME}/ s/${NAME}.*/${NAME}\ =\ ${VALUE}/" /etc/php-fpm.d/www.conf
+    sed -i "/^${NAME}/ s|${NAME}.*|${NAME}\ =\ ${VALUE}|" /etc/php-fpm.d/www.conf
     if [ -z "`grep -E ^${NAME} /etc/php-fpm.d/www.conf`" ] ; then 
 	echo "${NAME} = ${VALUE}" >> /etc/php-fpm.d/www.conf
 	echo "Added"
